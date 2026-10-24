@@ -1,7 +1,7 @@
 {
     "name": "asignua/filament-rating",
-    "description": "TODO: one-sentence description of Rating for Filament.",
-    "keywords": ["filament", "filament-plugin", "laravel"],
+    "description": "Star rating for Filament 5: a form field, a table column and an infolist entry. Half stars, custom icons, tooltips, keyboard and screen-reader support. Successor of mokhosh/filament-rating.",
+    "keywords": ["filament", "filament-plugin", "laravel", "rating", "stars", "review", "filament-rating"],
     "homepage": "https://github.com/asignua/filament-rating",
     "support": {
         "issues": "https://github.com/asignua/filament-rating/issues",
@@ -36,7 +36,8 @@
         "psr-4": {
             "Asignua\\FilamentRating\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/",
-            "Workbench\\Database\\Factories\\": "workbench/database/factories/"
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
         }
     },
     "extra": {
