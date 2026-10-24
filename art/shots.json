@@ -1,0 +1,24 @@
+{
+    "base": "http://host.docker.internal:8772",
+    "login": {"path": "/admin/login", "email": "emma@example.com", "password": "password"},
+    "shots": [
+        {"path": "/admin/reviews", "out": "table.jpg"},
+        {"path": "/admin/reviews", "out": "cover-source.jpg", "stamp": false},
+        {"path": "/admin/reviews/3/edit", "out": "form.jpg", "actions": [{"move": [0.75, 0.5], "in": "[role=slider] >> nth=0"}, {"wait": 300}]},
+        {"path": "/admin/reviews/3/edit", "out": "form-dark.jpg", "theme": "dark"},
+        {"path": "/admin/reviews/1", "out": "infolist.jpg"}
+    ],
+    "covers": [
+        {
+            "html": "../../scripts/art/cover.html",
+            "out": "cover.jpg",
+            "query": {
+                "title": "Stars, hearts, half steps",
+                "lead": "A rating field, table column and infolist entry for Filament 5 — keyboard-friendly, RTL-ready, a drop-in successor of mokhosh/filament-rating.",
+                "chips": "Half stars|Any icon, any max|Keyboard & screen readers|Light and dark",
+                "shot": "../../filament-rating/art/cover-source.jpg",
+                "crop": "700,370,2140,1250"
+            }
+        }
+    ]
+}
