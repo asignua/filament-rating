@@ -12,3 +12,5 @@ All notable changes to `asignua/filament-rating` are documented here.
 - Validation: numeric, within the range, on the step.
 - Namespaced stylesheet (`.fi-rating*`), no JavaScript build.
 - Translations: en, uk, pl, de, fr, es, it, nl, pt_BR, tr.
+
+- Review fixes: read-only values are never saved server side, blank/array payloads are handled, the real `aria-valuemin`, keyboard snaps to the step, `showValue()` prints the stored number, `extraAttributes()` on columns and entries, image icons are sized.

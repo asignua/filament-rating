@@ -58,11 +58,14 @@
 }
 
 .fi-rating-star svg,
-.fi-rating-zero svg {
+.fi-rating-star img,
+.fi-rating-zero svg,
+.fi-rating-zero img {
     display: block;
     width: var(--fi-rating-size);
     height: var(--fi-rating-size);
     max-width: none;
+    object-fit: contain;
 }
 
 /* The filled copy is clipped to the filled fraction; logical properties mirror it in RTL. */

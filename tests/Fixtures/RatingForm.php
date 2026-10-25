@@ -37,6 +37,14 @@ class RatingForm extends Component implements HasSchemas
             ->statePath('data');
     }
 
+    /**
+     * @return array<string, mixed>
+     */
+    public function saved(): array
+    {
+        return $this->form->getState();
+    }
+
     public function render(): string
     {
         return '<div>{{ $this->form }}</div>';

@@ -149,4 +149,50 @@ class RatingFieldTest extends TestCase
         $this->assertSame(3.5, $field->castRatingState('3.5'));
         $this->assertSame('abc', $field->castRatingState('abc'));
     }
+
+    public function test_a_read_only_field_ignores_a_crafted_value_on_the_server(): void
+    {
+        $component = Livewire::test(RatingForm::class)->set('data.frozen', 5)->set('data.plain', 5);
+        $saved = $component->instance()->saved();
+
+        $this->assertArrayNotHasKey('frozen', $saved);
+        $this->assertSame(5, $saved['plain']);
+    }
+
+    public function test_whitespace_is_stored_as_null(): void
+    {
+        $this->assertNull(Rating::make('r')->castRatingState('   '));
+
+        $saved = Livewire::test(RatingForm::class)->set('data.plain', ' ')->instance()->saved();
+
+        $this->assertNull($saved['plain']);
+    }
+
+    public function test_an_array_payload_is_a_validation_error_not_a_server_error(): void
+    {
+        Livewire::test(CreateReview::class)
+            ->fillForm(['product' => 'Box', 'rating' => 3, 'quality' => [], 'score' => ['x']])
+            ->call('create')
+            ->assertHasFormErrors(['quality', 'score']);
+
+        $this->assertNull(Rating::make('r')->dehydrateRatingState([]));
+    }
+
+    public function test_aria_min_is_real_and_now_is_omitted_when_empty(): void
+    {
+        $html = Livewire::test(CreateReview::class)->html();
+
+        // rating: half stars (min 0.5); quality: allowZero (min 0); score: whole (min 1).
+        $this->assertStringContainsString('aria-valuemin="0.5"', $html);
+        $this->assertStringContainsString('aria-valuemin="0"', $html);
+        $this->assertStringContainsString('aria-valuemin="1"', $html);
+        $this->assertStringNotContainsString(' aria-valuenow=', $html);
+    }
+
+    public function test_keyboard_snaps_an_off_grid_value_to_the_step_first(): void
+    {
+        $html = Livewire::test(RatingForm::class)->html();
+
+        $this->assertStringContainsString('Math.round(this.num(this.state) / this.step) * this.step', $html);
+    }
 }

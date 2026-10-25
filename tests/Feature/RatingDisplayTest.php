@@ -71,4 +71,29 @@ class RatingDisplayTest extends TestCase
             ->assertSeeHtml('width: 50%')
             ->assertSeeHtml('>4.3</span>');
     }
+
+    public function test_show_value_prints_the_stored_number_while_stars_clamp(): void
+    {
+        Review::query()->create(['product' => 'Box', 'rating' => 7]);
+
+        Livewire::test(ListReviews::class)
+            ->assertSeeHtml('aria-label="5 of 5 stars"')
+            ->assertSeeHtml('>7</span>');
+    }
+
+    public function test_extra_attributes_reach_the_column_and_the_entry(): void
+    {
+        $review = Review::query()->create(['product' => 'Box', 'rating' => 3]);
+
+        Livewire::test(ListReviews::class)->assertSeeHtml('data-probe="col"');
+        Livewire::test(ViewReview::class, ['record' => $review->getKey()])->assertSeeHtml('data-probe="ent"');
+    }
+
+    public function test_images_are_sized_like_svg_icons(): void
+    {
+        $css = (string) file_get_contents(__DIR__.'/../../resources/dist/filament-rating.css');
+
+        $this->assertStringContainsString('.fi-rating-star img', $css);
+        $this->assertStringContainsString('.fi-rating-zero img', $css);
+    }
 }

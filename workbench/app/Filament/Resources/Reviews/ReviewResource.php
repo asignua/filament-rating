@@ -61,7 +61,7 @@ class ReviewResource extends Resource
     public static function infolist(Schema $schema): Schema
     {
         return $schema->components([
-            RatingEntry::make('rating')->label('Overall')->halfStars()->showValue()->size('lg'),
+            RatingEntry::make('rating')->label('Overall')->halfStars()->showValue()->size('lg')->extraAttributes(['data-probe' => 'ent']),
             RatingEntry::make('quality')->color('success')->tooltips(static::$qualityLabels),
             RatingEntry::make('score')->stars(10)->size('sm')->color('warning')->icon('heroicon-s-heart')->emptyIcon('heroicon-o-heart'),
         ]);
@@ -72,7 +72,7 @@ class ReviewResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('product')->searchable()->weight('medium'),
-                RatingColumn::make('rating')->label('Overall')->halfStars()->showValue()->sortable(),
+                RatingColumn::make('rating')->label('Overall')->halfStars()->showValue()->extraAttributes(['data-probe' => 'col'])->sortable(),
                 RatingColumn::make('quality')->color('success')->tooltips(static::$qualityLabels)->sortable(),
                 RatingColumn::make('score')->stars(10)->size('xs')->color('warning')->icon('heroicon-s-heart')->emptyIcon('heroicon-o-heart'),
                 TextColumn::make('comment')->limit(40)->color('gray'),

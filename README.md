@@ -83,17 +83,16 @@ Every option is available on the field, the column and the entry (and takes a va
 | `halfStars()` / `theme(RatingTheme::HalfStars)` | Half steps (`3.5`) | whole stars |
 | `allowZero()` | A "no stars" button that stores `0` | off |
 | `clearable()` (field) | Clicking the current value (or pressing Delete) empties the field to `null` | off |
-| `color('success')` | A Filament colour name or a palette (`Color::Rose`) | `primary` |
+| `color('success')` | A Filament colour name that is registered on the panel (`primary`, `danger`, `success`, ... or your own via `FilamentColor`) or a palette (`Color::Amber`) | `primary` |
 | `size('lg')` | `xs`, `sm`, `md`, `lg`, `xl` | `md` (`sm` in tables) |
 | `icon('heroicon-s-heart')` | Filled star icon, any Blade icon | `heroicon-s-star` |
 | `emptyIcon('heroicon-o-heart')` | Empty star icon | the filled icon, muted |
 | `tooltips([...])` | Text per value, see below | none |
 | `showValue()` | Print the number ("4.5") after the stars | off |
-| `disabled()` / `readOnly()` (field) | Not operable, not focusable | off |
+| `disabled()` / `readOnly()` (field) | Not operable, not focusable. A `readOnly()` value is also never saved: it is left out of the form state on the server, so a crafted request cannot change it (the stored value stays as it was). | off |
 
 The field is a normal Filament field, so `required()`, `label()`, `live()`, `default()`, `helperText()`, `hint()` and the rest
-work as usual. It validates that the value is numeric, between 1 (or 0 with `allowZero()`) and the number of stars, and on
-the step (no `2.3` on half stars).
+work as usual. It validates that the value is numeric, between the minimum and the number of stars, and on the step (no `2.3` on half stars). The minimum is one step: `1` on whole stars, `0.5` on half stars, or `0` with `allowZero()`. Blank text counts as empty (`null`), anything that is not a number is rejected.
 
 ### Tooltips
 
@@ -120,7 +119,7 @@ RatingEntry::make('rating')->halfStars()->showValue()->size('lg')->color('warnin
 ```
 
 Columns are compact (`sm`) by default. The stars are rounded to the step of the theme (4.3 shows as 4.5 stars on half stars,
-4 on whole stars) and `showValue()` prints the stored number as it is. A record without a rating shows empty stars labelled
+4 on whole stars) and `showValue()` prints the stored number as it is (one decimal, not clamped to the number of stars). A record without a rating shows empty stars labelled
 "No rating". Sorting and searching are Filament's own (`->sortable()`).
 
 ### Custom icons
@@ -131,7 +130,7 @@ Rating::make('love')->icon('heroicon-s-heart')->emptyIcon('heroicon-o-heart')->c
 
 ## Accessibility
 
-- The field is a single `role="slider"` tab stop with `aria-valuemin/max/now` and a spoken value such as "3.5 of 5 stars".
+- The field is a single `role="slider"` tab stop with `aria-valuemin/max/now` (the real minimum; `aria-valuenow` is left out while empty) and a spoken value such as "3.5 of 5 stars".
   Arrow keys change the value by one step (they follow the reading direction in RTL), Home and End jump to the ends, Delete or
   Backspace clears (with `clearable()` or `allowZero()`). The focus ring is visible.
 - Columns and entries are `role="img"` with the same label; the decorative icons are hidden from screen readers.
@@ -153,7 +152,7 @@ Then replace the namespace: `Mokhosh\FilamentRating\` becomes `Asignua\FilamentR
 | --- | --- |
 | `Rating::make()`, `RatingColumn::make()`, `RatingEntry::make()` | Same |
 | `stars(int)`, `allowZero()` | Same |
-| `color('primary' ...)`, `size('xs' ... 'xl')` | Same; `color()` also takes a palette and a closure |
+| `color('primary' ...)`, `size('xs' ... 'xl')` | `size()` is the same. `color()` takes the panel's registered colours: mokhosh's `color('amber')` worked through Tailwind's `text-amber-500` class, here an unregistered name falls back to `primary`, so register the colour or pass `Color::Amber` |
 | `theme(RatingTheme::Simple / HalfStars)` | Same (plus the shorthand `halfStars()`) |
 | `getStars()`, `getStarsArray()`, `shouldAllowZero()`, `getColor()`, `getSize()`, `getTheme()` | Same |
 | `filament-rating:install` | Same (runs `filament:assets`) |

@@ -275,6 +275,21 @@ trait HasRatingOptions
         return get_color_css_variables($this->getColor(), shades: [400, 500, 600]) ?? '';
     }
 
+    public function getRatingMin(): float
+    {
+        return $this->shouldAllowZero() ? 0.0 : $this->getStep();
+    }
+
+    /**
+     * The stored number as it is (not clamped), for `showValue()`.
+     */
+    public function getRatingNumber(): ?float
+    {
+        $state = $this->getState();
+
+        return is_numeric($state) ? (float) $state : null;
+    }
+
     /**
      * The stored value as a number clamped to 0..stars, or null when there is none.
      */

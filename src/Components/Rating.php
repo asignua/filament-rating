@@ -30,14 +30,23 @@ class Rating extends Field
             $component->state($component->castRatingState($state));
         });
 
-        $this->dehydrateStateUsing(fn (Rating $component, mixed $state): int|float|string|null => $component->castRatingState($state));
+        $this->dehydrateStateUsing(fn (Rating $component, mixed $state): int|float|string|null => $component->dehydrateRatingState($state));
+
+        // A read-only field is not operable in the browser; server side its value is simply never saved.
+        $this->dehydrated(fn (Rating $component): bool => !$component->isReadOnly());
 
         $this->rule(static fn (Rating $component): Closure => function (string $attribute, mixed $value, Closure $fail) use ($component): void {
-            if (blank($value)) {
+            $label = $component->getValidationAttribute();
+
+            if (!is_scalar($value) && $value !== null) {
+                $fail(__('validation.numeric', ['attribute' => $label]));
+
                 return;
             }
 
-            $label = $component->getValidationAttribute();
+            if (blank($value)) {
+                return;
+            }
 
             if (!is_numeric($value)) {
                 $fail(__('validation.numeric', ['attribute' => $label]));
@@ -45,7 +54,7 @@ class Rating extends Field
                 return;
             }
 
-            $min = $component->shouldAllowZero() ? 0 : $component->getStep();
+            $min = $component->getRatingMin();
             $max = $component->getStars();
 
             if ($value < $min) {
@@ -83,6 +92,10 @@ class Rating extends Field
      */
     public function castRatingState(mixed $state): mixed
     {
+        if (is_string($state)) {
+            $state = trim($state);
+        }
+
         if ($state === null || $state === '') {
             return null;
         }
@@ -94,5 +107,15 @@ class Rating extends Field
         $number = (float) $state;
 
         return floor($number) === $number ? (int) $number : $number;
+    }
+
+    /**
+     * What is saved: a number or null; anything else (an array from a crafted request) never reaches the model.
+     */
+    public function dehydrateRatingState(mixed $state): int|float|string|null
+    {
+        $state = $this->castRatingState($state);
+
+        return is_int($state) || is_float($state) ? $state : (is_string($state) && is_numeric($state) ? $state : null);
     }
 }

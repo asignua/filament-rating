@@ -12,6 +12,7 @@
 <div
     {{
         $attributes
+            ->merge($rating->getExtraAttributes(), escape: false)
             ->class([
                 'fi-rating',
                 'fi-rating-static',
@@ -37,6 +38,6 @@
     </span>
 
     @if ($value !== null && $rating->shouldShowValue())
-        <span class="fi-rating-value" aria-hidden="true">{{ $rating->formatRatingValue($value) }}</span>
+        <span class="fi-rating-value" aria-hidden="true">{{ $rating->formatRatingValue($rating->getRatingNumber()) }}</span>
     @endif
 </div>

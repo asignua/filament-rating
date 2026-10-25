@@ -71,7 +71,7 @@
                 }
 
                 const rtl = this.isRtl()
-                const current = this.state === null || this.state === '' ? null : this.num(this.state)
+                const current = this.state === null || this.state === '' ? null : Math.round(this.num(this.state) / this.step) * this.step
                 let next
 
                 if (event.key === 'ArrowUp' || event.key === (rtl ? 'ArrowLeft' : 'ArrowRight')) {
@@ -142,14 +142,14 @@
             role="slider"
             tabindex="{{ $interactive ? 0 : -1 }}"
             aria-label="{{ $label }}"
-            aria-valuemin="0"
+            aria-valuemin="{{ $formatRatingValue($config['min']) }}"
             aria-valuemax="{{ $max }}"
-            aria-valuenow="{{ $current === null ? 0 : $formatRatingValue($current) }}"
+            @if ($current !== null) aria-valuenow="{{ $formatRatingValue($current) }}" @endif
             aria-valuetext="{{ $getRatingText($current) }}"
             @if (! $interactive) aria-disabled="true" @endif
             @if ($isReadOnly()) aria-readonly="true" @endif
             @if ($isRequired()) aria-required="true" @endif
-            x-bind:aria-valuenow="state === null || state === '' ? 0 : fmt(num(state))"
+            x-bind:aria-valuenow="state === null || state === '' ? null : fmt(num(state))"
             x-bind:aria-valuetext="text()"
             x-bind:title="hover === null ? null : labels[fmt(hover)] ?? null"
             x-on:keydown="key($event)"
