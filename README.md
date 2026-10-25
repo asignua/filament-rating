@@ -2,7 +2,7 @@
 
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://stand-with-ukraine.pp.ua)
 
-<img class="filament-hidden" src="https://raw.githubusercontent.com/asignua/filament-rating/main/art/cover.jpg" alt="Filament Rating">
+<img class="filament-hidden" src="https://raw.githubusercontent.com/asignua/filament-rating/v1.0.0/art/cover.jpg" alt="Filament Rating">
 
 [![Tests](https://img.shields.io/github/actions/workflow/status/asignua/filament-rating/tests.yml?branch=main&label=tests)](https://github.com/asignua/filament-rating/actions/workflows/tests.yml)
 
@@ -19,17 +19,17 @@ namespaced (`.fi-rating*`) and uses Filament's own colour variables. **Free (MIT
 
 A form with whole stars, half stars and a 10-heart score:
 
-![Rating fields in a form](https://raw.githubusercontent.com/asignua/filament-rating/main/art/form.jpg)
+![Rating fields in a form](https://raw.githubusercontent.com/asignua/filament-rating/v1.0.0/art/form.jpg)
 
 The same ratings in a table (compact) and in an infolist:
 
-![Rating column in a table](https://raw.githubusercontent.com/asignua/filament-rating/main/art/table.jpg)
+![Rating column in a table](https://raw.githubusercontent.com/asignua/filament-rating/v1.0.0/art/table.jpg)
 
-![Rating entries in an infolist](https://raw.githubusercontent.com/asignua/filament-rating/main/art/infolist.jpg)
+![Rating entries in an infolist](https://raw.githubusercontent.com/asignua/filament-rating/v1.0.0/art/infolist.jpg)
 
 Dark mode follows the panel:
 
-![The form in dark mode](https://raw.githubusercontent.com/asignua/filament-rating/main/art/form-dark.jpg)
+![The form in dark mode](https://raw.githubusercontent.com/asignua/filament-rating/v1.0.0/art/form-dark.jpg)
 
 ## Requirements
 
