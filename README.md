@@ -200,6 +200,15 @@ Open `/admin/reviews` and log in as `emma@example.com` / `password`.
 
 See [CHANGELOG.md](CHANGELOG.md).
 
+## More plugins by asign
+
+- [Toggle Icon Column](https://filamentphp.com/plugins/asign-toggle-icon-column) — clickable boolean icon column
+- [Themes](https://filamentphp.com/plugins/asign-themes) — per-user and per-panel colour themes
+- [Record Lock](https://filamentphp.com/plugins/asign-record-lock) — stop two people editing the same record
+- [Row Layout](https://filamentphp.com/plugins/asign-row-layout) — column manager for tables
+
+All plugins: <https://filamentphp.com/plugins?q=asign>
+
 ## License
 
 The MIT License (MIT). See [LICENSE.md](LICENSE.md).
