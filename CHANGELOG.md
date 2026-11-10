@@ -2,6 +2,10 @@
 
 All notable changes to `asignua/filament-rating` are documented here.
 
+## v1.1.0 - 2026-11-10
+
+- Requires Filament ^5.11.2; no deprecated Filament API was in use, so no code changes.
+
 ## v1.0.0 - 2026-10-25
 - Form field `Rating`, table column `RatingColumn` and infolist entry `RatingEntry` for Filament 5, API-compatible with
   `mokhosh/filament-rating` (`stars()`, `allowZero()`, `color()`, `size()`, `theme(RatingTheme::...)`).
