@@ -1,10 +1,13 @@
 # Filament Rating
 
 [![Stand With Ukraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://stand-with-ukraine.pp.ua)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/asignua/filament-rating.svg?style=flat-square)](https://packagist.org/packages/asignua/filament-rating)
+[![Tests](https://img.shields.io/github/actions/workflow/status/asignua/filament-rating/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/asignua/filament-rating/actions/workflows/tests.yml)
+[![Total Downloads](https://img.shields.io/packagist/dt/asignua/filament-rating.svg?style=flat-square)](https://packagist.org/packages/asignua/filament-rating)
+[![License](https://img.shields.io/packagist/l/asignua/filament-rating.svg?style=flat-square)](https://github.com/asignua/filament-rating/blob/main/LICENSE.md)
+[![Plumb score](https://plumbphp.dev/badges/asignua/filament-rating/composite.svg)](https://plumbphp.dev/asignua/filament-rating)
 
 <img class="filament-hidden" src="https://raw.githubusercontent.com/asignua/filament-rating/v1.0.0/art/cover.jpg" alt="Filament Rating">
-
-[![Tests](https://img.shields.io/github/actions/workflow/status/asignua/filament-rating/tests.yml?branch=main&label=tests)](https://github.com/asignua/filament-rating/actions/workflows/tests.yml)
 
 Star ratings for Filament 5: a **form field**, a **table column** and an **infolist entry** that look the same everywhere.
 Half stars, a "no stars" choice, custom icons (hearts, thumbs, anything from Blade Icons), per-value tooltips, an optional
@@ -208,6 +211,8 @@ See [CHANGELOG.md](CHANGELOG.md).
 - [Row Layout](https://filamentphp.com/plugins/asign-row-layout) — column manager for tables
 
 All plugins: <https://filamentphp.com/plugins?q=asign>
+
+Catalogue of free and commercial plugins: <https://asign.tech/en/plugins>
 
 ## License
 
